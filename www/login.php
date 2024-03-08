@@ -49,7 +49,6 @@ if($_GET!=[]){
                   </li>
                 </ul>
               </div>
-              <div>Bonjour Michel !</div>
             </div>
           </nav>
     </header>

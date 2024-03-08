@@ -1,6 +1,7 @@
 <?php
 require('./modeles/user.php');
 session_start();
+session_destroy();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +38,7 @@ session_start();
                   ';}?>
                 </ul>
               </div>
-              <div>Bonjour <?=$_SESSION['email'];?> !</div>
+              <div>Bonjour <?php if(!$_SESSION){echo "connectez vous.";}else{echo $_SESSION['email'];}?></div>
             </div>
           </nav>
     </header>
