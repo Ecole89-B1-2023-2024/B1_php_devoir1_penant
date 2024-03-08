@@ -1,3 +1,7 @@
+<?php
+require('./modeles/user.php');
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +12,7 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
+<header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
               <a class="navbar-brand" href="#">Navbar</a>
@@ -18,40 +22,22 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
+                    <a class="nav-link" href="register.php">Inscription</a>
                   </li>
+                  <?php if($_SESSION==[]){
+                  echo '
                   <li class="nav-item">
-                    <a class="nav-link" href="register.html">Inscription</a>
+                    <a class="nav-link" href="login.php">Connexion</a>
                   </li>
+                  ';} else {
+                  echo '
                   <li class="nav-item">
-                    <a class="nav-link" href="login.html">Connexion</a>
+                    <a class="nav-link" href="logout.php">Déconnexion</a>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Déconnexion</a>
-                  </li>
+                  ';}?>
                 </ul>
               </div>
-              <div>Bonjour Michel !</div>
+              <div>Bonjour <?=$_SESSION['email'];?> !</div>
             </div>
           </nav>
     </header>
-    <main>
-        <form class="w-75 mx-auto my-5 border p-2" action="" method="post">
-            <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
-                </div>
-            </div>
-            <button class="btn btn-secondary mt-3">Valider</button>
-
-        </form>
-    </main>
-</body>
-</html>

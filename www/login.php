@@ -1,3 +1,27 @@
+<?php
+require("./classes/User.php");
+require("./modeles/user.php");
+if($_GET!=[]){
+    $erreur = [];
+    $regex = '/\w{1,8}/';
+    if (!isset($_GET['email']) || !preg_match('/[a-z]{1,8}+@[a-z]*(.)[a-z]{1,3}/', $_GET['email'])){
+        $erreur['email']="email invalide";
+    }
+    if (!isset($_GET['password']) || !preg_match($regex, $_GET['password'])){
+        $erreur['password']="mot de passe invalide";
+    }
+    if ($erreur!=[]){
+        var_dump('erreur!');
+    } else {
+        //var_dump($user);
+        //var_dump($erreur);
+        $login = [$_GET['email'], $_GET['password']];
+        loginUser($login);
+        header('location: http://localhost/B1_php_devoir1_penant/www/index.php');
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +42,10 @@
               <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
+                    <a class="nav-link active" aria-current="page" href="index.php">Accueil</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="register.html">Inscription</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="login.html">Connexion</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Déconnexion</a>
+                    <a class="nav-link" href="register.php">Inscription</a>
                   </li>
                 </ul>
               </div>
@@ -36,38 +54,21 @@
           </nav>
     </header>
     <main>
-        <form class="w-75 mx-auto my-5 border p-2" action="" method="post">
+        <form class="w-75 mx-auto my-5 border p-2" action="">
             <div class="mb-3 row">
                 <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Pseudo</label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="votrepseudo">
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Nom</label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="votrenom">
-                </div>
-            </div>
-            <div class="mb-3 row">
-                <label for="staticEmail" class="col-sm-2 col-form-label">Prénom</label>
-                <div class="col-sm-10">
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="votreprénom">
+                    <input type="text"  class="form-control" name="email" id="email">
                 </div>
             </div>
             <div class="mb-3 row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
+                    <input type="password" class="form-control" name="password" id="password">
                 </div>
             </div>
-            <button class="btn btn-secondary mt-3">Valider</button>
+            <button class="btn btn-secondary mt-3" type="submit">Valider</button>
+
         </form>
     </main>
 </body>
